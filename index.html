@@ -2,110 +2,140 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Ейск в кармане — прототип</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+    <title>Ейск в кармане — полный путеводитель по городу</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            user-select: none;
             -webkit-tap-highlight-color: transparent;
         }
+
         body {
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: #f2f4f8;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f5f7fb;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            margin: 0;
-            padding: 16px;
+            padding: 12px;
         }
+
+        /* Телефон */
         .phone {
-            max-width: 400px;
+            max-width: 380px;
             width: 100%;
+            height: 700px;
             background: white;
             border-radius: 44px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.3);
             overflow: hidden;
             position: relative;
             display: flex;
             flex-direction: column;
-            height: 700px;
         }
-        .status {
-            padding: 12px 20px 4px;
+
+        /* Статус бар */
+        .status-bar {
+            background: white;
+            padding: 14px 20px 8px;
             font-size: 14px;
             font-weight: 600;
             display: flex;
             justify-content: space-between;
-            background: white;
             border-bottom: 1px solid #eef2f6;
         }
-        .content {
+
+        /* Контент */
+        .app-content {
             flex: 1;
             overflow-y: auto;
-            padding: 20px 16px 90px;
+            padding: 16px;
+            padding-bottom: 80px;
         }
-        .title {
+
+        /* Заголовки */
+        .page-title {
             font-size: 28px;
             font-weight: 800;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
+            color: #1f2937;
         }
-        .search {
-            background: #f0f2f5;
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 20px 0 12px;
+            color: #1f2937;
+        }
+
+        /* Поиск */
+        .search-bar {
+            background: #f3f4f6;
             border-radius: 30px;
             padding: 12px 16px;
-            margin-bottom: 24px;
-            color: #6c757d;
+            margin-bottom: 20px;
+            color: #6b7280;
+            font-size: 16px;
+            display: flex;
+            gap: 8px;
         }
-        .row-icons {
+
+        /* Иконки быстрого доступа */
+        .quick-icons {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
             flex-wrap: wrap;
             gap: 8px;
         }
-        .icon-tab {
+        .icon-item {
             text-align: center;
             width: 70px;
             cursor: pointer;
         }
-        .circle {
-            background: #e3f2fd;
+        .icon-circle {
+            background: #e0f2fe;
             width: 54px;
             height: 54px;
-            border-radius: 30px;
+            border-radius: 27px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 8px;
-            font-size: 28px;
+            font-size: 26px;
+            transition: transform 0.2s;
         }
-        .label {
-            font-size: 12px;
+        .icon-item:active .icon-circle {
+            transform: scale(0.95);
+        }
+        .icon-label {
+            font-size: 11px;
+            color: #374151;
             font-weight: 500;
         }
-        .section-header {
-            font-size: 20px;
-            font-weight: 700;
-            margin: 20px 0 12px;
-        }
+
+        /* Карточка места */
         .card {
-            background: #ffffff;
+            background: white;
             border-radius: 20px;
             padding: 12px;
             margin-bottom: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            border: 1px solid #eef2f9;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            border: 1px solid #edf2f7;
             display: flex;
-            gap: 14px;
+            gap: 12px;
             cursor: pointer;
+            transition: all 0.2s;
+        }
+        .card:active {
+            transform: scale(0.98);
+            background: #fafbfc;
         }
         .card-img {
-            width: 60px;
-            height: 60px;
+            width: 70px;
+            height: 70px;
             background: #eef2fa;
             border-radius: 16px;
             display: flex;
@@ -120,161 +150,378 @@
             font-weight: 700;
             font-size: 16px;
         }
-        .card-sub {
+        .card-desc {
             font-size: 13px;
-            color: #5e6873;
+            color: #6b7280;
             margin: 4px 0;
         }
-        .price {
+        .card-price {
+            font-size: 14px;
             font-weight: 700;
-            color: #0b5e7e;
+            color: #059669;
         }
-        .bottom-bar {
+        .card-rating {
+            color: #f59e0b;
+            font-size: 12px;
+        }
+
+        /* Карта-заглушка */
+        .map-placeholder {
+            background: linear-gradient(135deg, #d4e0f0 0%, #b8c8e0 100%);
+            height: 160px;
+            border-radius: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 16px 0;
+            color: #2c3e5c;
+            font-weight: 600;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* Баннер акции */
+        .promo-banner {
+            background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+            border-radius: 20px;
+            padding: 14px 16px;
+            margin-bottom: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .promo-text {
+            font-weight: 700;
+            font-size: 14px;
+        }
+        .promo-small {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        /* Нижняя навигация */
+        .bottom-nav {
             background: white;
-            border-top: 1px solid #e9eef3;
+            border-top: 1px solid #e5e7eb;
             display: flex;
             justify-content: space-around;
-            padding: 8px 16px 20px;
+            padding: 8px 12px 20px;
             position: absolute;
             bottom: 0;
-            left: 0;
-            right: 0;
+            width: 100%;
         }
-        .bottom-item {
+        .tab {
             text-align: center;
-            font-size: 12px;
-            color: #8e9aaf;
             cursor: pointer;
+            font-size: 11px;
+            color: #9ca3af;
             padding: 4px 0;
+            transition: color 0.2s;
             flex: 1;
         }
-        .bottom-item.active {
-            color: #0f7b9e;
+        .tab.active {
+            color: #0891b2;
             font-weight: 600;
         }
-        .bottom-icon {
+        .tab-icon {
             font-size: 22px;
             display: block;
+            margin-bottom: 4px;
         }
+
+        /* Переключение экранов */
         .screen {
             display: none;
         }
         .screen.active {
             display: block;
         }
-        .map-mock {
-            background: #d9e2ef;
-            height: 150px;
-            border-radius: 28px;
+
+        /* Сетка для полезного */
+        .useful-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 16px 0;
+        }
+        .useful-item {
+            text-align: center;
+            cursor: pointer;
+        }
+        .useful-circle {
+            background: #f0f9ff;
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 16px 0;
-            color: #2c3e5c;
+            margin: 0 auto 8px;
+            font-size: 28px;
         }
-        button, .icon-tab, .card, .bottom-item {
+        .useful-label {
+            font-size: 11px;
+            color: #4b5563;
+        }
+
+        /* Категории фильтров */
+        .filter-row {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+        .filter-chip {
+            background: #f3f4f6;
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 14px;
+            white-space: nowrap;
             cursor: pointer;
-            touch-action: manipulation;
+        }
+        .filter-chip.active {
+            background: #0891b2;
+            color: white;
+        }
+
+        /* Маршрут */
+        .route-stop {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            align-items: flex-start;
+        }
+        .route-number {
+            width: 28px;
+            height: 28px;
+            background: #0891b2;
+            color: white;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+        .route-text {
+            flex: 1;
+        }
+        .route-title {
+            font-weight: 700;
+        }
+        .route-time {
+            font-size: 11px;
+            color: #6b7280;
         }
     </style>
 </head>
 <body>
 <div class="phone">
-    <div class="status"><span>9:41</span><span>📶 🔋 98%</span></div>
-    <div class="content" id="mainContent">
-        <!-- главный экран -->
+    <div class="status-bar">
+        <span>9:41</span>
+        <span>📶 🔋 100%</span>
+    </div>
+
+    <div class="app-content" id="appContent">
+        <!-- ========== ГЛАВНЫЙ ЭКРАН ========== -->
         <div id="homeScreen" class="screen active">
-            <div class="title">Ейск в кармане</div>
-            <div class="search">🔍  Поиск: отель, кафе, пляж...</div>
-            <div class="row-icons">
-                <div class="icon-tab" data-goto="hotels"><div class="circle">🏨</div><div class="label">Отели</div></div>
-                <div class="icon-tab" data-goto="food"><div class="circle">🍽️</div><div class="label">Еда</div></div>
-                <div class="icon-tab" data-goto="fun"><div class="circle">🎢</div><div class="label">Развл.</div></div>
-                <div class="icon-tab" data-goto="beaches"><div class="circle">🏖️</div><div class="label">Пляжи</div></div>
+            <div class="page-title">Ейск в кармане</div>
+            <div class="search-bar">🔍 Поиск: отель, кафе, пляж...</div>
+            
+            <div class="promo-banner">
+                <div>
+                    <div class="promo-text">🎉 Скидка 20% в аквапарке</div>
+                    <div class="promo-small">По промокоду EYSK2026</div>
+                </div>
+                <div>🏊‍♂️</div>
             </div>
-            <div class="section-header">⭐ Рядом с вами</div>
-            <div class="card" data-goto="hotels"><div class="card-img">🏨</div><div class="card-info"><div class="card-title">Роза Ейска</div><div class="card-sub">⭐4.2 • до моря 5 мин</div><div class="price">от 2 500 ₽</div></div></div>
-            <div class="card" data-goto="food"><div class="card-img">🍽️</div><div class="card-info"><div class="card-title">Кафе «Лера»</div><div class="card-sub">⭐4.5 • русская кухня</div><div class="price">ср.чек 500₽</div></div></div>
-            <div class="card" data-goto="fun"><div class="card-img">🐬</div><div class="card-info"><div class="card-title">Дельфинарий</div><div class="card-sub">⭐4.7 • семейное шоу</div><div class="price">от 800₽</div></div></div>
+
+            <div class="quick-icons">
+                <div class="icon-item" data-goto="hotels"><div class="icon-circle">🏨</div><div class="icon-label">Отели</div></div>
+                <div class="icon-item" data-goto="food"><div class="icon-circle">🍽️</div><div class="icon-label">Еда</div></div>
+                <div class="icon-item" data-goto="fun"><div class="icon-circle">🎢</div><div class="icon-label">Развл.</div></div>
+                <div class="icon-item" data-goto="beaches"><div class="icon-circle">🏖️</div><div class="icon-label">Пляжи</div></div>
+                <div class="icon-item" data-goto="routes"><div class="icon-circle">🗺️</div><div class="icon-label">Маршруты</div></div>
+            </div>
+
+            <div class="section-title">⭐ Популярное рядом</div>
+            <div class="card" data-goto="hotels">
+                <div class="card-img">🏨</div>
+                <div class="card-info">
+                    <div class="card-title">Парк-отель «Южный берег»</div>
+                    <div class="card-rating">⭐⭐⭐⭐ 4.1</div>
+                    <div class="card-desc">ул. Пионерская, 2 • 200м до моря • бассейн</div>
+                    <div class="card-price">от 2 000 ₽/ночь</div>
+                </div>
+            </div>
+            <div class="card" data-goto="food">
+                <div class="card-img">🍽️</div>
+                <div class="card-info">
+                    <div class="card-title">Ресторан «Орбита»</div>
+                    <div class="card-rating">⭐⭐⭐⭐⭐ 4.7</div>
+                    <div class="card-desc">европейская кухня • работает до 04:00</div>
+                    <div class="card-price">ср. чек 800-1500 ₽</div>
+                </div>
+            </div>
+            <div class="card" data-goto="fun">
+                <div class="card-img">🐬</div>
+                <div class="card-info">
+                    <div class="card-title">Ейский дельфинарий</div>
+                    <div class="card-rating">⭐⭐⭐⭐⭐ 4.8</div>
+                    <div class="card-desc">шоу с дельфинами • фотосессия</div>
+                    <div class="card-price">от 800 ₽</div>
+                </div>
+            </div>
+            <div class="card" data-goto="beaches">
+                <div class="card-img">🏖️</div>
+                <div class="card-info">
+                    <div class="card-title">Центральный городской пляж</div>
+                    <div class="card-rating">⭐⭐⭐⭐ 4.2</div>
+                    <div class="card-desc">оборудованный пляж • есть для маломобильных</div>
+                    <div class="card-price">вход свободный</div>
+                </div>
+            </div>
         </div>
 
-        <!-- Отели -->
-        <div id="hotelsScreen" class="screen"><div class="title">🏨 Проживание</div>
-            <div class="card"><div class="card-img">🏨</div><div class="card-info"><div class="card-title">Роза Ейска</div><div class="card-sub">⭐4.2 • wi-fi, парковка</div><div class="price">от 2500₽</div></div></div>
-            <div class="card"><div class="card-img">🏨</div><div class="card-info"><div class="card-title">Гостевой дом «У моря»</div><div class="card-sub">⭐4.6 • 1-я линия</div><div class="price">от 3200₽</div></div></div>
-            <div class="card"><div class="card-img">🏕️</div><div class="card-info"><div class="card-title">База отдыха «Прибой»</div><div class="card-sub">⭐4.0 • баня, мангал</div><div class="price">от 4000₽</div></div></div>
+        <!-- ========== ПРОЖИВАНИЕ ========== -->
+        <div id="hotelsScreen" class="screen">
+            <div class="page-title">🏨 Проживание в Ейске</div>
+            <div class="filter-row">
+                <div class="filter-chip active">Все</div>
+                <div class="filter-chip">Отели</div>
+                <div class="filter-chip">Базы отдыха</div>
+                <div class="filter-chip">Гостевые дома</div>
+                <div class="filter-chip">Парк-отели</div>
+            </div>
+            <div class="card"><div class="card-img">🏨</div><div class="card-info"><div class="card-title">Гостиница «Отдых»</div><div class="card-rating">⭐⭐⭐⭐ 4.3</div><div class="card-desc">ул. Свердлова, 104 • 100м до моря • wi-fi, парковка</div><div class="card-price">от 3 500 ₽</div></div></div>
+            <div class="card"><div class="card-img">🏨</div><div class="card-info"><div class="card-title">База отдыха «Салют»</div><div class="card-rating">⭐⭐⭐⭐ 4.2</div><div class="card-desc">ул. Пляжная, 1/14 • 20м до моря</div><div class="card-price">от 3 400 ₽</div></div></div>
+            <div class="card"><div class="card-img">🏕️</div><div class="card-info"><div class="card-title">База отдыха «Кедр»</div><div class="card-rating">⭐⭐⭐ 3.9</div><div class="card-desc">тихое место • баня • мангалы</div><div class="card-price">от 2 800 ₽</div></div></div>
+            <div class="card"><div class="card-img">🏨</div><div class="card-info"><div class="card-title">Парк-отель «Южный берег»</div><div class="card-rating">⭐⭐⭐⭐ 4.1</div><div class="card-desc">ул. Пионерская, 2 • бассейн, питание</div><div class="card-price">от 2 000 ₽</div></div></div>
+            <div class="card"><div class="card-img">🏠</div><div class="card-info"><div class="card-title">Гостевой дом «Мирана»</div><div class="card-rating">⭐⭐⭐⭐ 4.4</div><div class="card-desc">детская площадка • общая кухня • BBQ</div><div class="card-price">от 2 200 ₽</div></div></div>
+            <div class="card"><div class="card-img">🏠</div><div class="card-info"><div class="card-title">Гостевой дом «Дуняша»</div><div class="card-rating">⭐⭐⭐⭐⭐ 4.6</div><div class="card-desc">рядом с пляжем • сад • уютно</div><div class="card-price">от 2 500 ₽</div></div></div>
         </div>
 
-        <!-- Еда -->
-        <div id="foodScreen" class="screen"><div class="title">🍽️ Кафе и рестораны</div>
-            <div class="card"><div class="card-img">🍝</div><div class="card-info"><div class="card-title">Кафе «Лера»</div><div class="card-sub">⭐4.5 • домашняя кухня</div><div class="price">500₽</div></div></div>
-            <div class="card"><div class="card-img">🥞</div><div class="card-info"><div class="card-title">Блинная «Уют»</div><div class="card-sub">⭐4.3 • завтраки</div><div class="price">350₽</div></div></div>
-            <div class="card"><div class="card-img">🍖</div><div class="card-info"><div class="card-title">Шашлычная «Кавказ»</div><div class="card-sub">⭐4.7 • уголь, люля</div><div class="price">800₽</div></div></div>
+        <!-- ========== ЕДА ========== -->
+        <div id="foodScreen" class="screen">
+            <div class="page-title">🍽️ Где поесть в Ейске</div>
+            <div class="filter-row">
+                <div class="filter-chip active">Все</div>
+                <div class="filter-chip">Рестораны</div>
+                <div class="filter-chip">Кафе</div>
+                <div class="filter-chip">Бары</div>
+                <div class="filter-chip">Кофейни</div>
+            </div>
+            <div class="card"><div class="card-img">🍝</div><div class="card-info"><div class="card-title">Ресторан «Орбита»</div><div class="card-rating">⭐⭐⭐⭐⭐ 4.7</div><div class="card-desc">европейская кухня • паб • работает до 04:00</div><div class="card-price">800-1500 ₽</div></div></div>
+            <div class="card"><div class="card-img">🍕</div><div class="card-info"><div class="card-title">Ресторан «Джоффре»</div><div class="card-rating">⭐⭐⭐⭐ 4.5</div><div class="card-desc">пицца • итальянская кухня • до 23:00</div><div class="card-price">600-1200 ₽</div></div></div>
+            <div class="card"><div class="card-img">🍖</div><div class="card-info"><div class="card-title">Ресторан «Торнадо»</div><div class="card-rating">⭐⭐⭐⭐ 4.4</div><div class="card-desc">рыбный ресторан • морепродукты • русская кухня</div><div class="card-price">700-1400 ₽</div></div></div>
+            <div class="card"><div class="card-img">🍜</div><div class="card-info"><div class="card-title">Ресторан «Bonus»</div><div class="card-rating">⭐⭐⭐⭐ 4.3</div><div class="card-desc">европейская, японская, русская, грузинская • до 01:00</div><div class="card-price">500-1500 ₽</div></div></div>
+            <div class="card"><div class="card-img">🍺</div><div class="card-info"><div class="card-title">1848 BBQ bar</div><div class="card-rating">⭐⭐⭐⭐ 4.2</div><div class="card-desc">паб • барбекю • живая музыка • до 03:00</div><div class="card-price">800-2000 ₽</div></div></div>
+            <div class="card"><div class="card-img">🍰</div><div class="card-info"><div class="card-title">Кафе «Сливки-Оливки»</div><div class="card-rating">⭐⭐⭐⭐ 4.1</div><div class="card-desc">кафетерий • супы • для вегетарианцев</div><div class="card-price">300-700 ₽</div></div></div>
         </div>
 
-        <!-- Развлечения -->
-        <div id="funScreen" class="screen"><div class="title">🎡 Чем заняться</div>
-            <div class="card"><div class="card-img">🐬</div><div class="card-info"><div class="card-title">Дельфинарий Ейска</div><div class="card-sub">шоу, фото с дельфинами</div><div class="price">800–1500₽</div></div></div>
-            <div class="card"><div class="card-img">🏄</div><div class="card-info"><div class="card-title">Кайт-школа</div><div class="card-sub">обучение серфингу</div><div class="price">от 2000₽</div></div></div>
-            <div class="card"><div class="card-img">🎠</div><div class="card-info"><div class="card-title">Парк аттракционов</div><div class="card-sub">американские горки</div><div class="price">500₽</div></div></div>
+        <!-- ========== РАЗВЛЕЧЕНИЯ ========== -->
+        <div id="funScreen" class="screen">
+            <div class="page-title">🎡 Развлечения в Ейске</div>
+            <div class="filter-row">
+                <div class="filter-chip active">Все</div>
+                <div class="filter-chip">Для детей</div>
+                <div class="filter-chip">Активные</div>
+                <div class="filter-chip">Культура</div>
+            </div>
+            <div class="card"><div class="card-img">🐬</div><div class="card-info"><div class="card-title">Ейский дельфинарий</div><div class="card-desc">шоу с дельфинами • фотосессия • семейное</div><div class="card-price">от 800 ₽</div></div></div>
+            <div class="card"><div class="card-img">🏄</div><div class="card-info"><div class="card-title">Кайт- и виндсёрфинг</div><div class="card-desc">Ейск — мекка сёрфинга  • обучение для новичков</div><div class="card-price">от 2 000 ₽/час</div></div></div>
+            <div class="card"><div class="card-img">🎨</div><div class="card-info"><div class="card-title">Художественный музей им. Арзамасцева</div><div class="card-desc">западноевропейская живопись • работы ейских художников</div><div class="card-price">от 200 ₽</div></div></div>
+            <div class="card"><div class="card-img">🏇</div><div class="card-info"><div class="card-title">Конные прогулки</div><div class="card-desc">прогулки верхом • обучение</div><div class="card-price">от 1 000 ₽/час</div></div></div>
+            <div class="card"><div class="card-img">⛵</div><div class="card-info"><div class="card-title">Яхтинг</div><div class="card-desc">прогулки на яхтах • фестиваль крейсерских яхт в мае</div><div class="card-price">от 1 500 ₽/час</div></div></div>
+            <div class="card"><div class="card-img">🪂</div><div class="card-info"><div class="card-title">Прыжки с парашютом</div><div class="card-desc">тандемные прыжки • вид на Азовское море</div><div class="card-price">от 5 000 ₽</div></div></div>
         </div>
 
-        <!-- Пляжи -->
-        <div id="beachesScreen" class="screen"><div class="title">🏝️ Пляжи Ейска</div>
-            <div class="map-mock">📌 Карта: Центральный пляж, Коса Долгая</div>
-            <div class="card"><div class="card-img">🏖️</div><div class="card-info"><div class="card-title">Центральный пляж</div><div class="card-sub">шезлонги, зонты, кабинки, спасатели</div></div></div>
-            <div class="card"><div class="card-img">🏖️</div><div class="card-info"><div class="card-title">Коса Долгая</div><div class="card-sub">дикий пляж, ракушки, закаты</div></div></div>
+        <!-- ========== ПЛЯЖИ ========== -->
+        <div id="beachesScreen" class="screen">
+            <div class="page-title">🏖️ Пляжи Ейска</div>
+            <div class="map-placeholder">
+                🗺️ Карта пляжей Ейска
+                <div style="font-size:12px">Всего в Ейском районе: 28 пляжей, 12 км береговой полосы</div>
+            </div>
+            <div class="card"><div class="card-img">🏖️</div><div class="card-info"><div class="card-title">Центральный городской пляж</div><div class="card-desc">оборудованный • кабинки • спасатели • доступ для маломобильных</div><div class="card-price">вход свободный</div></div></div>
+            <div class="card"><div class="card-img">🏝️</div><div class="card-info"><div class="card-title">Коса Долгая</div><div class="card-rating">⭐⭐⭐⭐⭐ 4.9</div><div class="card-desc">дикий пляж • живописные закаты • палатки</div><div class="card-price">вход свободный</div></div></div>
+            <div class="card"><div class="card-img">🏖️</div><div class="card-info"><div class="card-title">Пляж «Берег южный»</div><div class="card-desc">I категория • оборудованный тихий пляж</div><div class="card-price">вход свободный</div></div></div>
+            <div class="card"><div class="card-img">🏖️</div><div class="card-info"><div class="card-title">Пляж санатория «Ейск»</div><div class="card-desc">для маломобильных • чистый • ухоженный</div><div class="card-price">по абонементу</div></div></div>
+            <div class="card"><div class="card-img">🌊</div><div class="card-info"><div class="card-title">Молодёжный пляж</div><div class="card-desc">активный отдых • волейбол • кафе</div><div class="card-price">вход свободный</div></div></div>
+            <div class="card"><div class="card-img">🏖️</div><div class="card-info"><div class="card-title">Пляж «Кубанский хутор»</div><div class="card-desc">сельский туризм • бассейн • лежаки</div><div class="card-price">от 70 ₽</div></div></div>
+            <div class="notice" style="background:#f0f9ff; padding:12px; border-radius:16px; margin-top:8px; font-size:12px; color:#0891b2;">
+                📍 В 2026 году в Ейском районе будет открыто 22 пляжа в ст. Должанской и 6 в городе Ейске
+            </div>
+        </div>
+
+        <!-- ========== МАРШРУТЫ ========== -->
+        <div id="routesScreen" class="screen">
+            <div class="page-title">🗺️ Туристические маршруты</div>
+            
+            <div class="section-title">🍷 Приазовский Винный дом</div>
+            <div class="route-stop"><div class="route-number">1</div><div class="route-text"><div class="route-title">Экскурсия на виноградники</div><div class="route-time">⏱ 1.5 часа</div><div>с. Красноармейское, ул. 10-я бригада<br>Дегустация вин • современное оборудование • до 300 000 бутылок в год</div></div></div>
+            <div class="route-stop"><div class="route-number">2</div><div class="route-text"><div class="route-title">Путешествие по долинам Приазовья</div><div class="route-time">⏱ 4 часа</div><div>Красивые места • редкие растения и животные</div></div></div>
+            <div class="card" style="background:#fef3c7;"><div class="card-img">🍷</div><div class="card-info"><div class="card-title">Стоимость экскурсии</div><div class="card-price">от 500 до 1 500 ₽</div></div></div>
+
+            <div class="section-title">🏡 Кубанский хутор</div>
+            <div class="route-stop"><div class="route-number">1</div><div class="route-text"><div class="route-title">Знакомство с казачьим бытом</div><div class="route-time">⏱ 1.5-3 часа</div><div>п. Морской, ул. Центральная, 9в<br>Музей казачьего быта • домашняя ферма • пасека • конюшня</div></div></div>
+            <div class="route-stop"><div class="route-number">2</div><div class="route-text"><div class="route-title">Участие в старинных обрядах</div><div class="route-time">По предварительной записи</div><div>Свадьба • сватовство • народные праздники</div></div></div>
+            <div class="card" style="background:#fef3c7;"><div class="card-img">🏡</div><div class="card-info"><div class="card-title">Стоимость экскурсии</div><div class="card-price">от 70 до 650 ₽ (дети дешевле)</div></div></div>
+
+            <div class="section-title">🏛️ Пеший маршрут по Ейску</div>
+            <div class="route-stop"><div class="route-number">1</div><div class="route-text"><div class="route-title">Памятник графу Воронцову</div><div class="route-time">основатель Ейска</div></div></div>
+            <div class="route-stop"><div class="route-number">2</div><div class="route-text"><div class="route-title">Парк им. Поддубного</div><div class="route-time">покормить белок</div></div></div>
+            <div class="route-stop"><div class="route-number">3</div><div class="route-text"><div class="route-title">Памятник варенику</div><div class="route-time">символ кубанского колорита</div></div></div>
+            <div class="route-stop"><div class="route-number">4</div><div class="route-text"><div class="route-title">Памятник Нонне Мордюковой и Сергею Бондарчуку</div></div></div>
+            <div class="route-stop"><div class="route-number">5</div><div class="route-text"><div class="route-title">Ейская коса</div><div class="route-time">закат на Азовском море</div></div></div>
         </div>
     </div>
 
-    <div class="bottom-bar">
-        <div class="bottom-item" data-screen="home"><span class="bottom-icon">🏠</span><br>Главная</div>
-        <div class="bottom-item" data-screen="hotels"><span class="bottom-icon">🏨</span><br>Отели</div>
-        <div class="bottom-item" data-screen="food"><span class="bottom-icon">🍽️</span><br>Еда</div>
-        <div class="bottom-item" data-screen="fun"><span class="bottom-icon">🎢</span><br>Игры</div>
-        <div class="bottom-item" data-screen="beaches"><span class="bottom-icon">🏖️</span><br>Пляж</div>
+    <!-- Нижняя навигация -->
+    <div class="bottom-nav">
+        <div class="tab active" data-screen="home"><span class="tab-icon">🏠</span><br>Главная</div>
+        <div class="tab" data-screen="hotels"><span class="tab-icon">🏨</span><br>Отели</div>
+        <div class="tab" data-screen="food"><span class="tab-icon">🍽️</span><br>Еда</div>
+        <div class="tab" data-screen="fun"><span class="tab-icon">🎢</span><br>Игры</div>
+        <div class="tab" data-screen="beaches"><span class="tab-icon">🏖️</span><br>Пляж</div>
+        <div class="tab" data-screen="routes"><span class="tab-icon">🗺️</span><br>Маршруты</div>
     </div>
 </div>
 
 <script>
-    (function() {
-        function showScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(function(s) {
-                s.classList.remove('active');
-            });
-            var active = document.getElementById(screenId + 'Screen');
-            if(active) active.classList.add('active');
-            document.querySelectorAll('.bottom-item').forEach(function(item) {
-                item.classList.remove('active');
-                if(item.getAttribute('data-screen') === screenId) {
-                    item.classList.add('active');
-                }
-            });
-        }
-
-        // нижнее меню
-        var bottomItems = document.querySelectorAll('.bottom-item');
-        bottomItems.forEach(function(item) {
-            item.addEventListener('click', function(e) {
-                var screen = this.getAttribute('data-screen');
-                if(screen) showScreen(screen);
-                e.preventDefault();
-            });
+    // Функция переключения экранов
+    function showScreen(screenId) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        const targetScreen = document.getElementById(screenId + 'Screen');
+        if(targetScreen) targetScreen.classList.add('active');
+        
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.classList.remove('active');
+            if(tab.getAttribute('data-screen') === screenId) {
+                tab.classList.add('active');
+            }
         });
+    }
 
-        // быстрые иконки + карточки
-        var clickableElements = document.querySelectorAll('[data-goto]');
-        clickableElements.forEach(function(el) {
-            el.addEventListener('click', function(e) {
-                var target = this.getAttribute('data-goto');
-                if(target === 'hotels') showScreen('hotels');
-                if(target === 'food') showScreen('food');
-                if(target === 'fun') showScreen('fun');
-                if(target === 'beaches') showScreen('beaches');
-                e.stopPropagation();
-            });
+    // Слушаем нижние табы
+    document.querySelectorAll('.tab').forEach(tab => {
+        tab.addEventListener('click', (e) => {
+            const screenId = tab.getAttribute('data-screen');
+            if(screenId) showScreen(screenId);
         });
-    })();
+    });
+
+    // Слушаем иконки быстрого доступа и карточки с data-goto
+    document.querySelectorAll('[data-goto]').forEach(el => {
+        el.addEventListener('click', (e) => {
+            const goto = el.getAttribute('data-goto');
+            if(goto) showScreen(goto);
+            e.stopPropagation();
+        });
+    });
 </script>
 </body>
 </html>
