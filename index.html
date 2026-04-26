@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Ейск в кармане — прототип</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: #f2f4f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 16px;
+        }
+        .phone {
+            max-width: 400px;
+            width: 100%;
+            background: white;
+            border-radius: 44px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 700px;
+        }
+        .status {
+            padding: 12px 20px 4px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            background: white;
+            border-bottom: 1px solid #eef2f6;
+        }
+        .content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px 16px 90px;
+        }
+        .title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+        .search {
+            background: #f0f2f5;
+            border-radius: 30px;
+            padding: 12px 16px;
+            margin-bottom: 24px;
+            color: #6c757d;
+        }
+        .row-icons {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .icon-tab {
+            text-align: center;
+            width: 70px;
+            cursor: pointer;
+        }
+        .circle {
+            background: #e3f2fd;
+            width: 54px;
+            height: 54px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+            font-size: 28px;
+        }
+        .label {
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .section-header {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 20px 0 12px;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 12px;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid #eef2f9;
+            display: flex;
+            gap: 14px;
+            cursor: pointer;
+        }
+        .card-img {
+            width: 60px;
+            height: 60px;
+            background: #eef2fa;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+        .card-info {
+            flex: 1;
+        }
+        .card-title {
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .card-sub {
+            font-size: 13px;
+            color: #5e6873;
+            margin: 4px 0;
+        }
+        .price {
+            font-weight: 700;
+            color: #0b5e7e;
+        }
+        .bottom-bar {
+            background: white;
+            border-top: 1px solid #e9eef3;
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 16px 20px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        .bottom-item {
+            text-align: center;
+            font-size: 12px;
+            color: #8e9aaf;
+            cursor: pointer;
+            padding: 4px 0;
+            flex: 1;
+        }
+        .bottom-item.active {
+            color: #0f7b9e;
+            font-weight: 600;
+        }
+        .bottom-icon {
+            font-size: 22px;
+            display: block;
+        }
+        .screen {
+            display: none;
+        }
+        .screen.active {
+            display: block;
+        }
+        .map-mock {
+            background: #d9e2ef;
+            height: 150px;
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 16px 0;
+            color: #2c3e5c;
+        }
+        button, .icon-tab, .card, .bottom-item {
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+    </style>
+</head>
+<body>
+<div class="phone">
+    <div class="status"><span>9:41</span><span>📶 🔋 98%</span></div>
+    <div class="content" id="mainContent">
+        <!-- главный экран -->
+        <div id="homeScreen" class="screen active">
+            <div class="title">Ейск в кармане</div>
+            <div class="search">🔍  Поиск: отель, кафе, пляж...</div>
+            <div class="row-icons">
+                <div class="icon-tab" data-goto="hotels"><div class="circle">🏨</div><div class="label">Отели</div></div>
+                <div class="icon-tab" data-goto="food"><div class="circle">🍽️</div><div class="label">Еда</div></div>
+                <div class="icon-tab" data-goto="fun"><div class="circle">🎢</div><div class="label">Развл.</div></div>
+                <div class="icon-tab" data-goto="beaches"><div class="circle">🏖️</div><div class="label">Пляжи</div></div>
+            </div>
+            <div class="section-header">⭐ Рядом с вами</div>
+            <div class="card" data-goto="hotels"><div class="card-img">🏨</div><div class="card-info"><div class="card-title">Роза Ейска</div><div class="card-sub">⭐4.2 • до моря 5 мин</div><div class="price">от 2 500 ₽</div></div></div>
+            <div class="card" data-goto="food"><div class="card-img">🍽️</div><div class="card-info"><div class="card-title">Кафе «Лера»</div><div class="card-sub">⭐4.5 • русская кухня</div><div class="price">ср.чек 500₽</div></div></div>
+            <div class="card" data-goto="fun"><div class="card-img">🐬</div><div class="card-info"><div class="card-title">Дельфинарий</div><div class="card-sub">⭐4.7 • семейное шоу</div><div class="price">от 800₽</div></div></div>
+        </div>
+
+        <!-- Отели -->
+        <div id="hotelsScreen" class="screen"><div class="title">🏨 Проживание</div>
+            <div class="card"><div class="card-img">🏨</div><div class="card-info"><div class="card-title">Роза Ейска</div><div class="card-sub">⭐4.2 • wi-fi, парковка</div><div class="price">от 2500₽</div></div></div>
+            <div class="card"><div class="card-img">🏨</div><div class="card-info"><div class="card-title">Гостевой дом «У моря»</div><div class="card-sub">⭐4.6 • 1-я линия</div><div class="price">от 3200₽</div></div></div>
+            <div class="card"><div class="card-img">🏕️</div><div class="card-info"><div class="card-title">База отдыха «Прибой»</div><div class="card-sub">⭐4.0 • баня, мангал</div><div class="price">от 4000₽</div></div></div>
+        </div>
+
+        <!-- Еда -->
+        <div id="foodScreen" class="screen"><div class="title">🍽️ Кафе и рестораны</div>
+            <div class="card"><div class="card-img">🍝</div><div class="card-info"><div class="card-title">Кафе «Лера»</div><div class="card-sub">⭐4.5 • домашняя кухня</div><div class="price">500₽</div></div></div>
+            <div class="card"><div class="card-img">🥞</div><div class="card-info"><div class="card-title">Блинная «Уют»</div><div class="card-sub">⭐4.3 • завтраки</div><div class="price">350₽</div></div></div>
+            <div class="card"><div class="card-img">🍖</div><div class="card-info"><div class="card-title">Шашлычная «Кавказ»</div><div class="card-sub">⭐4.7 • уголь, люля</div><div class="price">800₽</div></div></div>
+        </div>
+
+        <!-- Развлечения -->
+        <div id="funScreen" class="screen"><div class="title">🎡 Чем заняться</div>
+            <div class="card"><div class="card-img">🐬</div><div class="card-info"><div class="card-title">Дельфинарий Ейска</div><div class="card-sub">шоу, фото с дельфинами</div><div class="price">800–1500₽</div></div></div>
+            <div class="card"><div class="card-img">🏄</div><div class="card-info"><div class="card-title">Кайт-школа</div><div class="card-sub">обучение серфингу</div><div class="price">от 2000₽</div></div></div>
+            <div class="card"><div class="card-img">🎠</div><div class="card-info"><div class="card-title">Парк аттракционов</div><div class="card-sub">американские горки</div><div class="price">500₽</div></div></div>
+        </div>
+
+        <!-- Пляжи -->
+        <div id="beachesScreen" class="screen"><div class="title">🏝️ Пляжи Ейска</div>
+            <div class="map-mock">📌 Карта: Центральный пляж, Коса Долгая</div>
+            <div class="card"><div class="card-img">🏖️</div><div class="card-info"><div class="card-title">Центральный пляж</div><div class="card-sub">шезлонги, зонты, кабинки, спасатели</div></div></div>
+            <div class="card"><div class="card-img">🏖️</div><div class="card-info"><div class="card-title">Коса Долгая</div><div class="card-sub">дикий пляж, ракушки, закаты</div></div></div>
+        </div>
+    </div>
+
+    <div class="bottom-bar">
+        <div class="bottom-item" data-screen="home"><span class="bottom-icon">🏠</span><br>Главная</div>
+        <div class="bottom-item" data-screen="hotels"><span class="bottom-icon">🏨</span><br>Отели</div>
+        <div class="bottom-item" data-screen="food"><span class="bottom-icon">🍽️</span><br>Еда</div>
+        <div class="bottom-item" data-screen="fun"><span class="bottom-icon">🎢</span><br>Игры</div>
+        <div class="bottom-item" data-screen="beaches"><span class="bottom-icon">🏖️</span><br>Пляж</div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(function(s) {
+                s.classList.remove('active');
+            });
+            var active = document.getElementById(screenId + 'Screen');
+            if(active) active.classList.add('active');
+            document.querySelectorAll('.bottom-item').forEach(function(item) {
+                item.classList.remove('active');
+                if(item.getAttribute('data-screen') === screenId) {
+                    item.classList.add('active');
+                }
+            });
+        }
+
+        // нижнее меню
+        var bottomItems = document.querySelectorAll('.bottom-item');
+        bottomItems.forEach(function(item) {
+            item.addEventListener('click', function(e) {
+                var screen = this.getAttribute('data-screen');
+                if(screen) showScreen(screen);
+                e.preventDefault();
+            });
+        });
+
+        // быстрые иконки + карточки
+        var clickableElements = document.querySelectorAll('[data-goto]');
+        clickableElements.forEach(function(el) {
+            el.addEventListener('click', function(e) {
+                var target = this.getAttribute('data-goto');
+                if(target === 'hotels') showScreen('hotels');
+                if(target === 'food') showScreen('food');
+                if(target === 'fun') showScreen('fun');
+                if(target === 'beaches') showScreen('beaches');
+                e.stopPropagation();
+            });
+        });
+    })();
+</script>
+</body>
+</html>
