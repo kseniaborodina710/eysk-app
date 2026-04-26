@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-    <title>Ейск в кармане — городской гид</title>
+    <title>Ейск в кармане — яркий гид по городу</title>
     <style>
         * {
             margin: 0;
@@ -14,7 +14,7 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: #f2f4f8;
+            background: linear-gradient(145deg, #f0f4f8 0%, #e2e8f0 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -24,231 +24,202 @@
 
         /* Телефон */
         .phone {
-            max-width: 375px;
+            max-width: 380px;
             width: 100%;
-            height: 700px;
-            background: white;
-            border-radius: 44px;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.3);
+            height: 720px;
+            background: #ffffff;
+            border-radius: 48px;
+            box-shadow: 0 30px 50px -20px rgba(0,0,0,0.4), inset 0 0 0 6px #f8fafc, inset 0 0 0 12px #e2e8f0;
             overflow: hidden;
             position: relative;
             display: flex;
             flex-direction: column;
         }
 
+        /* Динамик */
+        .dynamic-island {
+            background: #1a1a2e;
+            width: 110px;
+            height: 32px;
+            border-radius: 24px;
+            margin: 12px auto 0;
+            position: relative;
+            z-index: 20;
+        }
+
         .status-bar {
             background: transparent;
-            padding: 14px 20px 8px;
+            padding: 8px 20px 4px;
             font-size: 14px;
             font-weight: 600;
             display: flex;
             justify-content: space-between;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 10;
-            color: white;
+            color: #1e293b;
         }
 
         .app-content {
             flex: 1;
             overflow-y: auto;
-            padding: 0;
-            padding-bottom: 80px;
+            padding: 0 16px 80px;
         }
 
-        /* Hero-блок с фото Ейска */
+        /* Стили для скролла */
+        .app-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .app-content::-webkit-scrollbar-track {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+        .app-content::-webkit-scrollbar-thumb {
+            background: #0f3b2c;
+            border-radius: 10px;
+        }
+
+        /* Hero-блок */
         .hero {
-            height: 320px;
-            background: linear-gradient(135deg, #0f2b3d 0%, #1a4a6f 100%);
-            position: relative;
-            display: flex;
-            align-items: flex-end;
-            justify-content: flex-start;
-            padding: 80px 20px 30px;
-            background-size: cover;
-            background-position: center;
-        }
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 100px;
-            background: linear-gradient(to top, white, transparent);
-        }
-        .hero-content {
-            position: relative;
-            z-index: 2;
+            background: linear-gradient(135deg, #0f3b2c 0%, #1e6b5e 50%, #2a9d8f 100%);
+            border-radius: 32px;
+            padding: 24px 20px;
+            margin: 16px 0 20px;
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: "✨";
+            position: absolute;
+            right: -20px;
+            top: -20px;
+            font-size: 120px;
+            opacity: 0.15;
         }
         .hero-title {
-            font-size: 34px;
+            font-size: 28px;
             font-weight: 800;
-            margin-bottom: 4px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
         }
         .hero-sub {
             font-size: 14px;
-            opacity: 0.9;
+            opacity: 0.85;
+            margin-top: 4px;
         }
 
-        /* Карточка погоды */
+        /* Красивая погода */
         .weather-card {
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 30px;
-            padding: 14px 20px;
-            margin: -30px 16px 20px 16px;
-            position: relative;
-            z-index: 5;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            background: linear-gradient(120deg, #fef9e6 0%, #fff5e0 100%);
+            border-radius: 28px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,200,100,0.3);
         }
         .weather-temp {
-            font-size: 32px;
+            font-size: 36px;
             font-weight: 800;
-            color: #1e293b;
+            color: #e67e22;
         }
         .weather-desc {
             font-size: 13px;
-            color: #64748b;
+            color: #7f8c8d;
+        }
+        .weather-icon {
+            font-size: 52px;
         }
 
-        /* Формы */
-        .auth-card {
-            margin: 16px;
-            background: white;
-            border-radius: 32px;
-            padding: 24px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-        }
-        .input-group {
-            margin-bottom: 16px;
-        }
-        .input-group label {
-            display: block;
-            font-size: 13px;
-            font-weight: 500;
-            margin-bottom: 6px;
-            color: #334155;
-        }
-        .input-group input {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid #e2e8f0;
-            border-radius: 20px;
-            font-size: 15px;
-            font-family: inherit;
-            background: #f8fafc;
-        }
-        .btn {
-            width: 100%;
-            padding: 14px;
-            background: #0f3b2c;
-            color: white;
-            border: none;
-            border-radius: 30px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            margin-top: 8px;
-            transition: all 0.2s;
-        }
-        .btn:active {
-            transform: scale(0.97);
-        }
-        .btn-outline {
-            background: white;
-            color: #0f3b2c;
-            border: 1px solid #0f3b2c;
-        }
-        .switch-auth {
-            text-align: center;
-            margin-top: 16px;
-            font-size: 13px;
-            color: #64748b;
-        }
-        .switch-auth span {
-            color: #0f3b2c;
-            font-weight: 600;
-            cursor: pointer;
+        /* Приветствие */
+        .greeting {
+            background: #f1f5f9;
+            border-radius: 24px;
+            padding: 16px;
+            margin-bottom: 20px;
+            border-left: 5px solid #0f3b2c;
         }
 
         /* Категории */
-        .categories {
-            padding: 0 16px;
-            margin: 20px 0;
-        }
-        .section-header {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 14px;
+        .section-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 16px;
             color: #1e293b;
-        }
-        .cats-scroll {
-            display: flex;
-            gap: 16px;
-            overflow-x: auto;
-            padding-bottom: 8px;
-        }
-        .cat-item {
-            text-align: center;
-            min-width: 70px;
-            cursor: pointer;
-        }
-        .cat-circle {
-            width: 60px;
-            height: 60px;
-            background: #e6f7f0;
-            border-radius: 30px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin: 0 auto 8px;
-            font-size: 28px;
+            gap: 8px;
+        }
+        .section-title span {
+            background: #0f3b2c;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 30px;
+            font-size: 12px;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .cat-card {
+            background: white;
+            border-radius: 24px;
+            padding: 12px 6px;
+            text-align: center;
+            cursor: pointer;
             transition: all 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            border: 1px solid #eef2f6;
         }
-        .cat-item:active .cat-circle {
-            transform: scale(0.95);
-            background: #c8f0e0;
+        .cat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
-        .cat-label {
+        .cat-icon {
+            font-size: 32px;
+            margin-bottom: 6px;
+        }
+        .cat-name {
             font-size: 11px;
-            font-weight: 500;
+            font-weight: 600;
             color: #334155;
         }
 
-        /* Карточки мест */
+        /* Карточки мест — красочные */
         .place-card {
             background: white;
             border-radius: 24px;
-            margin-bottom: 12px;
-            overflow: hidden;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+            margin-bottom: 14px;
+            padding: 16px;
+            display: flex;
+            gap: 16px;
             cursor: pointer;
             transition: all 0.2s;
-            display: flex;
+            border: 1px solid #f0f2f5;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
         }
         .place-card:active {
             transform: scale(0.98);
+            background: #fafcff;
         }
-        .place-img {
-            width: 90px;
-            height: 90px;
-            object-fit: cover;
+        .place-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(145deg, #e8f5e9 0%, #c8e6d9 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
         }
         .place-info {
             flex: 1;
-            padding: 12px;
         }
-        .place-title {
-            font-weight: 700;
-            font-size: 15px;
+        .place-name {
+            font-weight: 800;
+            font-size: 16px;
+            color: #1e293b;
         }
         .place-desc {
             font-size: 12px;
@@ -260,71 +231,130 @@
             font-weight: 700;
             color: #0f3b2c;
         }
+        .place-rating {
+            display: flex;
+            gap: 2px;
+            margin-top: 4px;
+        }
+        .star {
+            color: #fbbf24;
+            font-size: 12px;
+        }
+
+        /* Карта (декоративная) */
+        .map-preview {
+            background: linear-gradient(145deg, #e0f2fe 0%, #bae6fd 100%);
+            border-radius: 28px;
+            padding: 20px;
+            text-align: center;
+            margin: 16px 0;
+            border: 2px dashed #0891b2;
+        }
+
+        /* Акции */
+        .promo-card {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-radius: 20px;
+            padding: 14px 16px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        /* Формы */
+        .auth-card {
+            background: white;
+            border-radius: 32px;
+            padding: 28px 20px;
+            margin: 16px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        .input-group {
+            margin-bottom: 18px;
+        }
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: #334155;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid #e2e8f0;
+            border-radius: 24px;
+            font-size: 15px;
+            background: #f8fafc;
+        }
+        .btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #0f3b2c 0%, #1e6b5e 100%);
+            color: white;
+            border: none;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 8px;
+            transition: all 0.2s;
+        }
+        .btn:active {
+            transform: scale(0.97);
+        }
+        .btn-outline {
+            background: white;
+            color: #0f3b2c;
+            border: 2px solid #0f3b2c;
+        }
 
         /* Профиль */
-        .profile-card {
-            background: linear-gradient(135deg, #0f3b2c 0%, #1a5a42 100%);
+        .profile-header {
+            background: linear-gradient(135deg, #0f3b2c 0%, #1e6b5e 100%);
             border-radius: 32px;
-            margin: 16px;
-            padding: 24px;
+            padding: 32px 20px;
             text-align: center;
             color: white;
+            margin-bottom: 20px;
         }
         .profile-avatar {
-            width: 80px;
-            height: 80px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 40px;
+            width: 90px;
+            height: 90px;
+            background: rgba(255,255,255,0.25);
+            border-radius: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 12px;
-            font-size: 40px;
+            font-size: 48px;
         }
 
-        /* Модальное окно с фото */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0,0,0,0.95);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-        }
-        .modal.active {
-            display: flex;
-        }
-        .modal-img {
-            max-width: 85%;
-            max-height: 60%;
-            border-radius: 24px;
-            object-fit: cover;
-        }
-        .modal-close {
-            position: absolute;
-            top: 50px;
-            right: 25px;
-            font-size: 36px;
+        /* Уведомления */
+        .notification-badge {
+            background: #ef4444;
             color: white;
-            cursor: pointer;
+            border-radius: 20px;
+            padding: 2px 8px;
+            font-size: 10px;
+            position: absolute;
+            top: -5px;
+            right: -10px;
         }
 
         /* Нижняя навигация */
         .bottom-nav {
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(20px);
-            border-top: 1px solid rgba(0,0,0,0.05);
+            background: rgba(255,255,255,0.98);
+            border-top: 1px solid #eef2f6;
             display: flex;
             justify-content: space-around;
-            padding: 8px 16px 22px;
+            padding: 10px 16px 24px;
             position: absolute;
             bottom: 0;
             width: 100%;
+            backdrop-filter: blur(10px);
         }
         .tab {
             text-align: center;
@@ -332,14 +362,15 @@
             font-size: 11px;
             color: #94a3b8;
             flex: 1;
-            transition: all 0.2s;
+            transition: all 0.1s;
+            position: relative;
         }
         .tab.active {
             color: #0f3b2c;
-            font-weight: 600;
+            font-weight: 700;
         }
         .tab-icon {
-            font-size: 22px;
+            font-size: 24px;
             display: block;
             margin-bottom: 4px;
         }
@@ -351,8 +382,41 @@
             display: block;
         }
 
-        /* Список недавних */
-        .recent-empty {
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .modal.active {
+            display: flex;
+        }
+        .modal-content {
+            background: white;
+            border-radius: 40px;
+            padding: 24px;
+            width: 85%;
+            text-align: center;
+        }
+        .modal-close {
+            position: absolute;
+            top: 40px;
+            right: 25px;
+            font-size: 32px;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Список избранного */
+        .favorite-empty {
             text-align: center;
             padding: 40px;
             color: #94a3b8;
@@ -361,137 +425,160 @@
 </head>
 <body>
 <div class="phone">
+    <div class="dynamic-island"></div>
     <div class="status-bar">
         <span>9:41</span>
-        <span>📶 🔋 98%</span>
+        <span>📶 📱 100%</span>
     </div>
 
     <div class="app-content" id="appContent">
         <!-- ЭКРАН ВХОДА -->
         <div id="authScreen" class="screen active">
-            <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1587538794963-3b8706d6c0d9?w=800&h=400&fit=crop');">
-                <div class="hero-content">
-                    <div class="hero-title">Ейск</div>
-                    <div class="hero-sub">Курорт на Азовском море</div>
-                </div>
+            <div class="hero">
+                <div class="hero-title">🌊 Ейск</div>
+                <div class="hero-sub">Курорт на Азовском море</div>
             </div>
             <div class="weather-card">
-                <div>
-                    <div class="weather-temp">+22°</div>
-                    <div class="weather-desc">Солнечно • ветер 3 м/с</div>
-                </div>
-                <div style="font-size: 44px;">☀️</div>
+                <div><div class="weather-temp">+24°</div><div class="weather-desc">Солнечно • море +22°</div></div>
+                <div class="weather-icon">☀️</div>
             </div>
             <div class="auth-card">
-                <div class="input-group"><label>📧 Email</label><input type="email" id="loginEmail" placeholder="hello@example.com"></div>
+                <div class="input-group"><label>📧 Email</label><input type="email" id="loginEmail" placeholder="hello@eysk.ru"></div>
                 <div class="input-group"><label>🔒 Пароль</label><input type="password" id="loginPassword" placeholder="••••••"></div>
-                <button class="btn" onclick="login()">Войти</button>
-                <div class="switch-auth">Нет аккаунта? <span onclick="showRegister()">Регистрация</span></div>
+                <button class="btn" onclick="login()">🚀 Войти в Ейск</button>
+                <div class="switch-auth" style="text-align:center; margin-top:16px;">Нет аккаунта? <span style="color:#0f3b2c; font-weight:700;" onclick="showRegister()">Создать</span></div>
             </div>
         </div>
 
-        <!-- ЭКРАН РЕГИСТРАЦИИ -->
+        <!-- РЕГИСТРАЦИЯ -->
         <div id="registerScreen" class="screen">
-            <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1587538794963-3b8706d6c0d9?w=800&h=400&fit=crop');">
-                <div class="hero-content"><div class="hero-title">Добро пожаловать</div><div class="hero-sub">Присоединяйся!</div></div>
-            </div>
-            <div class="weather-card"><div><div class="weather-temp">+22°</div><div class="weather-desc">Ейск • Солнечно</div></div><div style="font-size:44px;">☀️</div></div>
+            <div class="hero"><div class="hero-title">✨ Добро пожаловать</div><div class="hero-sub">Присоединяйся к гиду</div></div>
             <div class="auth-card">
                 <div class="input-group"><label>👤 Имя</label><input type="text" id="regName" placeholder="Анна"></div>
-                <div class="input-group"><label>📧 Email</label><input type="email" id="regEmail" placeholder="anna@mail.ru"></div>
+                <div class="input-group"><label>📧 Email</label><input type="email" id="regEmail" placeholder="anna@eysk.ru"></div>
                 <div class="input-group"><label>🔒 Пароль</label><input type="password" id="regPassword" placeholder="••••••"></div>
-                <button class="btn" onclick="register()">Зарегистрироваться</button>
-                <div class="switch-auth">Уже есть аккаунт? <span onclick="showLogin()">Войти</span></div>
+                <button class="btn" onclick="register()">🎉 Зарегистрироваться</button>
+                <div class="switch-auth" style="text-align:center; margin-top:16px;">Уже есть аккаунт? <span style="color:#0f3b2c; font-weight:700;" onclick="showLogin()">Войти</span></div>
             </div>
         </div>
 
-        <!-- ГЛАВНЫЙ ЭКРАН ПОСЛЕ ВХОДА -->
+        <!-- ГЛАВНЫЙ ЭКРАН -->
         <div id="mainScreen" class="screen">
-            <div class="hero" style="background-image: url('https://images.unsplash.com/photo-1590496793929-36417d3117de?w=800&h=400&fit=crop');">
-                <div class="hero-content"><div class="hero-title" id="welcomeName">Привет!</div><div class="hero-sub">Твой гид по Ейску</div></div>
+            <div class="hero">
+                <div class="hero-title" id="welcomeName">Привет, друг!</div>
+                <div class="hero-sub">Твой гид по Ейску готов помочь 🔥</div>
             </div>
-            <div class="weather-card"><div><div class="weather-temp">+22°</div><div class="weather-desc">Солнечно • Азовское море +20°</div></div><div style="font-size:44px;">☀️</div></div>
-
-            <div class="categories">
-                <div class="section-header">📱 Быстрый вход</div>
-                <div class="cats-scroll">
-                    <div class="cat-item" data-goto="hotels"><div class="cat-circle">🏨</div><div class="cat-label">Отели</div></div>
-                    <div class="cat-item" data-goto="food"><div class="cat-circle">🍽️</div><div class="cat-label">Еда</div></div>
-                    <div class="cat-item" data-goto="fun"><div class="cat-circle">🎢</div><div class="cat-label">Развлечения</div></div>
-                    <div class="cat-item" data-goto="beaches"><div class="cat-circle">🏖️</div><div class="cat-label">Пляжи</div></div>
-                    <div class="cat-item" data-goto="routes"><div class="cat-circle">🗺️</div><div class="cat-label">Маршруты</div></div>
-                </div>
+            
+            <div class="weather-card">
+                <div><div class="weather-temp">+24°</div><div class="weather-desc">Азовское море +22° • ветер 3 м/с</div></div>
+                <div class="weather-icon">🌊☀️</div>
             </div>
 
-            <div class="categories">
-                <div class="section-header">⭐ Популярное в Ейске</div>
-                <div class="place-card" data-goto="hotels" data-name="Парк-отель «Южный берег»" data-photo="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=200&h=200&fit=crop">
-                    <img class="place-img" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=200&h=200&fit=crop" alt="отель">
-                    <div class="place-info"><div class="place-title">Парк-отель «Южный берег»</div><div class="place-desc">200м до моря • бассейн</div><div class="place-price">от 2 000 ₽</div></div>
-                </div>
-                <div class="place-card" data-goto="food" data-name="Ресторан «Орбита»" data-photo="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=200&h=200&fit=crop">
-                    <img class="place-img" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=200&h=200&fit=crop" alt="ресторан">
-                    <div class="place-info"><div class="place-title">Ресторан «Орбита»</div><div class="place-desc">европейская кухня • до 04:00</div><div class="place-price">800–1500 ₽</div></div>
-                </div>
-                <div class="place-card" data-goto="fun" data-name="Ейский дельфинарий" data-photo="https://images.unsplash.com/photo-1541685067744-d641ef0c5b2e?w=200&h=200&fit=crop">
-                    <img class="place-img" src="https://images.unsplash.com/photo-1541685067744-d641ef0c5b2e?w=200&h=200&fit=crop" alt="дельфинарий">
-                    <div class="place-info"><div class="place-title">Ейский дельфинарий</div><div class="place-desc">шоу с дельфинами</div><div class="place-price">от 800 ₽</div></div>
-                </div>
-                <div class="place-card" data-goto="beaches" data-name="Коса Долгая" data-photo="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&h=200&fit=crop">
-                    <img class="place-img" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&h=200&fit=crop" alt="пляж">
-                    <div class="place-info"><div class="place-title">Коса Долгая</div><div class="place-desc">дикий пляж • закаты</div><div class="place-price">вход свободный</div></div>
-                </div>
+            <div class="greeting">
+                <div style="font-weight:600;">⭐ Сегодня в Ейске</div>
+                <div style="font-size:13px; color:#475569;">Фестиваль вина на набережной • скидка 20% в аквапарке</div>
+            </div>
+
+            <div class="section-title">📱 Быстрый вход <span>6 направлений</span></div>
+            <div class="categories-grid">
+                <div class="cat-card" data-goto="hotels"><div class="cat-icon">🏨</div><div class="cat-name">Отели</div></div>
+                <div class="cat-card" data-goto="food"><div class="cat-icon">🍽️</div><div class="cat-name">Рестораны</div></div>
+                <div class="cat-card" data-goto="fun"><div class="cat-icon">🎢</div><div class="cat-name">Развлеч.</div></div>
+                <div class="cat-card" data-goto="beaches"><div class="cat-icon">🏖️</div><div class="cat-name">Пляжи</div></div>
+                <div class="cat-card" data-goto="routes"><div class="cat-icon">🗺️</div><div class="cat-name">Маршруты</div></div>
+                <div class="cat-card" data-goto="sights"><div class="cat-icon">🏛️</div><div class="cat-name">Что посмотреть</div></div>
+            </div>
+
+            <div class="section-title">⭐ Топ мест Ейска</div>
+            <div class="place-card" data-goto="hotels" data-name="🌴 Парк-отель Южный берег" data-price="от 2000₽" data-desc="бассейн, 200м до моря" data-rating="4.5">
+                <div class="place-icon">🏨</div><div class="place-info"><div class="place-name">Парк-отель «Южный берег»</div><div class="place-desc">бассейн • 200м до моря</div><div class="place-price">от 2 000 ₽</div><div class="place-rating">★★★★☆ 4.5</div></div>
+            </div>
+            <div class="place-card" data-goto="food" data-name="🍷 Ресторан Орбита" data-price="800-1500₽" data-desc="европейская • до 04:00" data-rating="4.7">
+                <div class="place-icon">🍽️</div><div class="place-info"><div class="place-name">Ресторан «Орбита»</div><div class="place-desc">европейская кухня • живая музыка</div><div class="place-price">800–1500 ₽</div><div class="place-rating">★★★★★ 4.7</div></div>
+            </div>
+            <div class="place-card" data-goto="fun" data-name="🐬 Дельфинарий Ейска" data-price="от 800₽" data-desc="шоу с дельфинами" data-rating="4.8">
+                <div class="place-icon">🐬</div><div class="place-info"><div class="place-name">Ейский дельфинарий</div><div class="place-desc">шоу • фотосессия</div><div class="place-price">от 800 ₽</div><div class="place-rating">★★★★★ 4.8</div></div>
+            </div>
+            <div class="place-card" data-goto="beaches" data-name="🏖️ Коса Долгая" data-price="бесплатно" data-desc="живописные закаты" data-rating="4.9">
+                <div class="place-icon">🏝️</div><div class="place-info"><div class="place-name">Коса Долгая</div><div class="place-desc">дикий пляж • закаты</div><div class="place-price">вход свободный</div><div class="place-rating">★★★★★ 4.9</div></div>
+            </div>
+
+            <div class="promo-card">
+                <div><div style="font-weight:800;">🎁 Акция дня</div><div style="font-size:13px;">20% на кайт-сёрфинг</div></div>
+                <div>🏄‍♂️</div>
+            </div>
+
+            <div class="map-preview">
+                🗺️ Карта Ейска: Центральный пляж • Коса Долгая • Парк Поддубного
             </div>
         </div>
 
-        <!-- ПРОФИЛЬ -->
+        <!-- ПРОФИЛЬ с подарками -->
         <div id="profileScreen" class="screen">
-            <div class="profile-card">
+            <div class="profile-header">
                 <div class="profile-avatar">👤</div>
-                <div class="profile-name" id="profileName" style="font-size:20px; font-weight:700;">Гость</div>
-                <div class="profile-email" id="profileEmail" style="opacity:0.8;">user@example.com</div>
+                <div class="profile-name" id="profileName" style="font-size:22px; font-weight:800;">Гость</div>
+                <div class="profile-email" id="profileEmail">user@eysk.ru</div>
+                <div style="margin-top:12px;">🎁 У вас 3 непрочитанных подарка от отелей Ейска</div>
             </div>
-            <div class="categories">
-                <div class="section-header">🕐 Недавно просмотренные</div>
-                <div id="recentList"></div>
-            </div>
-            <div style="padding: 16px;">
-                <button class="btn btn-outline" onclick="logout()">🚪 Выйти из аккаунта</button>
-            </div>
+            <div class="section-title">🕐 Недавно просмотренные</div>
+            <div id="recentList"></div>
+            <div class="section-title">🎁 Ваши бонусы</div>
+            <div class="promo-card">🍷 Скидка 15% в винном доме «Приазовье»</div>
+            <div class="promo-card">🏨 Бронирование отеля — кэшбэк 10%</div>
+            <div style="padding: 0 0 20px 0;"><button class="btn-outline btn" onclick="logout()">🚪 Выйти из аккаунта</button></div>
         </div>
 
         <!-- ОТЕЛИ -->
-        <div id="hotelsScreen" class="screen"><div class="categories"><div class="section-header">🏨 Отели и базы отдыха</div></div>
-            <div class="place-card" data-name="Парк-отель Южный берег" data-photo="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=200&h=200&fit=crop"><img class="place-img" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=200&h=200&fit=crop"><div class="place-info"><div class="place-title">Парк-отель «Южный берег»</div><div class="place-desc">ул. Пионерская, 2 • 200м до моря</div><div class="place-price">от 2 000 ₽</div></div></div>
-            <div class="place-card" data-name="Гостиница Отдых" data-photo="https://images.unsplash.com/photo-1582719202054-ae7351d9cfc0?w=200&h=200&fit=crop"><img class="place-img" src="https://images.unsplash.com/photo-1582719202054-ae7351d9cfc0?w=200&h=200&fit=crop"><div class="place-info"><div class="place-title">Гостиница «Отдых»</div><div class="place-desc">ул. Свердлова, 104 • 100м до моря</div><div class="place-price">от 3 500 ₽</div></div></div>
-            <div class="place-card" data-name="База отдыха Кедр" data-photo="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=200&h=200&fit=crop"><img class="place-img" src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=200&h=200&fit=crop"><div class="place-info"><div class="place-title">База отдыха «Кедр»</div><div class="place-desc">тихое место • баня • мангалы</div><div class="place-price">от 2 800 ₽</div></div></div>
+        <div id="hotelsScreen" class="screen">
+            <div class="section-title">🏨 Отели и базы отдыха</div>
+            <div class="place-card"><div class="place-icon">🏨</div><div class="place-info"><div class="place-name">Парк-отель «Южный берег»</div><div class="place-desc">ул. Пионерская, 2 • бассейн</div><div class="place-price">от 2 000 ₽</div><div class="place-rating">★★★★☆ 4.2</div></div></div>
+            <div class="place-card"><div class="place-icon">🏨</div><div class="place-info"><div class="place-name">Гостиница «Отдых»</div><div class="place-desc">ул. Свердлова, 104 • до моря 100м</div><div class="place-price">от 3 500 ₽</div><div class="place-rating">★★★★☆ 4.1</div></div></div>
+            <div class="place-card"><div class="place-icon">🌲</div><div class="place-info"><div class="place-name">База отдыха «Кедр»</div><div class="place-desc">баня • мангалы • тишина</div><div class="place-price">от 2 800 ₽</div><div class="place-rating">★★★☆☆ 3.9</div></div></div>
         </div>
 
         <!-- ЕДА -->
-        <div id="foodScreen" class="screen"><div class="categories"><div class="section-header">🍽️ Рестораны и кафе</div></div>
-            <div class="place-card" data-name="Орбита" data-photo="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=200&h=200&fit=crop"><img class="place-img" src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=200&h=200&fit=crop"><div class="place-info"><div class="place-title">Ресторан «Орбита»</div><div class="place-desc">европейская кухня • до 04:00</div><div class="place-price">800-1500 ₽</div></div></div>
-            <div class="place-card" data-name="Джоффре" data-photo="https://images.unsplash.com/photo-1592861956120-e80fc1d9d8f5?w=200&h=200&fit=crop"><img class="place-img" src="https://images.unsplash.com/photo-1592861956120-e80fc1d9d8f5?w=200&h=200&fit=crop"><div class="place-info"><div class="place-title">Ресторан «Джоффре»</div><div class="place-desc">пицца • итальянская • до 23:00</div><div class="place-price">600-1200 ₽</div></div></div>
+        <div id="foodScreen" class="screen">
+            <div class="section-title">🍽️ Рестораны и кафе</div>
+            <div class="place-card"><div class="place-icon">🍷</div><div class="place-info"><div class="place-name">Ресторан «Орбита»</div><div class="place-desc">европейская • паб • до 04:00</div><div class="place-price">800–1500 ₽</div><div class="place-rating">★★★★★ 4.7</div></div></div>
+            <div class="place-card"><div class="place-icon">🍕</div><div class="place-info"><div class="place-name">Ресторан «Джоффре»</div><div class="place-desc">итальянская • пицца</div><div class="place-price">600–1200 ₽</div><div class="place-rating">★★★★☆ 4.3</div></div></div>
+            <div class="place-card"><div class="place-icon">🐟</div><div class="place-info"><div class="place-name">Ресторан «Торнадо»</div><div class="place-desc">рыбный • морепродукты</div><div class="place-price">700–1400 ₽</div><div class="place-rating">★★★★☆ 4.4</div></div></div>
         </div>
 
         <!-- РАЗВЛЕЧЕНИЯ -->
-        <div id="funScreen" class="screen"><div class="categories"><div class="section-header">🎡 Развлечения</div></div>
-            <div class="place-card" data-name="Дельфинарий" data-photo="https://images.unsplash.com/photo-1541685067744-d641ef0c5b2e?w=200&h=200&fit=crop"><img class="place-img" src="https://images.unsplash.com/photo-1541685067744-d641ef0c5b2e?w=200&h=200&fit=crop"><div class="place-info"><div class="place-title">Ейский дельфинарий</div><div class="place-desc">шоу с дельфинами • фотосессия</div><div class="place-price">800-1500 ₽</div></div></div>
-            <div class="place-card" data-name="Кайт-школа" data-photo="https://images.unsplash.com/photo-1517479149771-5e2740ec99f5?w=200&h=200&fit=crop"><img class="place-img" src="https://images.unsplash.com/photo-1517479149771-5e2740ec99f5?w=200&h=200&fit=crop"><div class="place-info"><div class="place-title">Кайт-школа</div><div class="place-desc">обучение сёрфингу • Ейск — столица кайта</div><div class="place-price">от 2 000 ₽</div></div></div>
+        <div id="funScreen" class="screen">
+            <div class="section-title">🎡 Развлечения</div>
+            <div class="place-card"><div class="place-icon">🐬</div><div class="place-info"><div class="place-name">Ейский дельфинарий</div><div class="place-desc">шоу с дельфинами</div><div class="place-price">800–1500 ₽</div><div class="place-rating">★★★★★ 4.8</div></div></div>
+            <div class="place-card"><div class="place-icon">🏄</div><div class="place-info"><div class="place-name">Кайт-школа</div><div class="place-desc">обучение сёрфингу</div><div class="place-price">от 2 000 ₽/час</div><div class="place-rating">★★★★★ 4.9</div></div></div>
+            <div class="place-card"><div class="place-icon">🎨</div><div class="place-info"><div class="place-name">Художественный музей</div><div class="place-desc">живопись • творчество</div><div class="place-price">от 200 ₽</div><div class="place-rating">★★★★☆ 4.2</div></div></div>
         </div>
 
         <!-- ПЛЯЖИ -->
-        <div id="beachesScreen" class="screen"><div class="categories"><div class="section-header">🏖️ Пляжи Ейска</div></div>
-            <div class="place-card" data-name="Центральный пляж" data-photo="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&h=200&fit=crop"><img class="place-img" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=200&h=200&fit=crop"><div class="place-info"><div class="place-title">Центральный городской пляж</div><div class="place-desc">оборудованный пляж • спасатели</div><div class="place-price">вход свободный</div></div></div>
-            <div class="place-card" data-name="Коса Долгая" data-photo="https://images.unsplash.com/photo-1573790387438-4da905039392?w=200&h=200&fit=crop"><img class="place-img" src="https://images.unsplash.com/photo-1573790387438-4da905039392?w=200&h=200&fit=crop"><div class="place-info"><div class="place-title">Коса Долгая</div><div class="place-desc">дикий пляж • живописные закаты</div><div class="place-price">вход свободный</div></div></div>
+        <div id="beachesScreen" class="screen">
+            <div class="section-title">🏖️ Пляжи Ейска</div>
+            <div class="place-card"><div class="place-icon">🏖️</div><div class="place-info"><div class="place-name">Центральный городской пляж</div><div class="place-desc">шезлонги • кабинки • спасатели</div><div class="place-price">бесплатно</div><div class="place-rating">★★★★☆ 4.2</div></div></div>
+            <div class="place-card"><div class="place-icon">🌅</div><div class="place-info"><div class="place-name">Коса Долгая</div><div class="place-desc">дикий пляж • закаты</div><div class="place-price">бесплатно</div><div class="place-rating">★★★★★ 4.9</div></div></div>
+            <div class="place-card"><div class="place-icon">🏖️</div><div class="place-info"><div class="place-name">Молодёжный пляж</div><div class="place-desc">волейбол • кафе</div><div class="place-price">бесплатно</div><div class="place-rating">★★★★☆ 4.0</div></div></div>
         </div>
 
         <!-- МАРШРУТЫ -->
-        <div id="routesScreen" class="screen"><div class="categories"><div class="section-header">🗺️ Туристические маршруты</div></div>
-            <div class="place-card" data-name="Винный маршрут" data-photo="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=200&h=200&fit=crop"><img class="place-img" src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=200&h=200&fit=crop"><div class="place-info"><div class="place-title">Приазовский Винный дом</div><div class="place-desc">дегустация вин • экскурсия по виноградникам</div><div class="place-price">от 500 ₽</div></div></div>
-            <div class="place-card" data-name="Кубанский хутор" data-photo="https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?w=200&h=200&fit=crop"><img class="place-img" src="https://images.unsplash.com/photo-1540910419892-4a36d2c3266c?w=200&h=200&fit=crop"><div class="place-info"><div class="place-title">Кубанский хутор</div><div class="place-desc">казачий быт • ферма • пасека • обряды</div><div class="place-price">от 70 ₽</div></div></div>
+        <div id="routesScreen" class="screen">
+            <div class="section-title">🗺️ Маршруты по Ейску</div>
+            <div class="place-card"><div class="place-icon">🍷</div><div class="place-info"><div class="place-name">Винный маршрут</div><div class="place-desc">Приазовский Винный дом • дегустация</div><div class="place-price">от 500 ₽</div></div></div>
+            <div class="place-card"><div class="place-icon">🏡</div><div class="place-info"><div class="place-name">Кубанский хутор</div><div class="place-desc">казачий быт • ферма • пасека</div><div class="place-price">от 70 ₽</div></div></div>
+            <div class="place-card"><div class="place-icon">🏛️</div><div class="place-info"><div class="place-name">Исторический центр</div><div class="place-desc">памятник Воронцову • парк Поддубного</div><div class="place-price">бесплатно</div></div></div>
+        </div>
+
+        <!-- ДОСТОПРИМЕЧАТЕЛЬНОСТИ -->
+        <div id="sightsScreen" class="screen">
+            <div class="section-title">🏛️ Что посмотреть</div>
+            <div class="place-card"><div class="place-icon">🏛️</div><div class="place-info"><div class="place-name">Памятник графу Воронцову</div><div class="place-desc">основатель Ейска</div><div class="place-price">бесплатно</div></div></div>
+            <div class="place-card"><div class="place-icon">🐿️</div><div class="place-info"><div class="place-name">Парк им. Поддубного</div><div class="place-desc">покормить белок</div><div class="place-price">бесплатно</div></div></div>
+            <div class="place-card"><div class="place-icon">🥟</div><div class="place-info"><div class="place-name">Памятник варенику</div><div class="place-desc">символ Кубани</div><div class="place-price">бесплатно</div></div></div>
         </div>
     </div>
 
+    <!-- Нижнее меню -->
     <div class="bottom-nav" id="bottomNav" style="display: none;">
         <div class="tab" data-screen="mainScreen"><span class="tab-icon">🏠</span><br>Главная</div>
         <div class="tab" data-screen="profileScreen"><span class="tab-icon">👤</span><br>Профиль</div>
@@ -509,37 +596,19 @@
     function loadUser() { const u = localStorage.getItem('eysk_user'); if(u) { currentUser = JSON.parse(u); recent = currentUser.recent || []; return true; } return false; }
     function saveRecent() { if(currentUser) { currentUser.recent = recent; saveUser(); } }
 
-    function updateUI() {
-        document.getElementById('bottomNav').style.display = currentUser ? 'flex' : 'none';
-        if(currentUser) {
-            document.getElementById('welcomeName').innerText = `Привет, ${currentUser.name || currentUser.email.split('@')[0]}!`;
-            document.getElementById('profileName').innerText = currentUser.name || 'Гость';
-            document.getElementById('profileEmail').innerText = currentUser.email;
-            renderRecent();
-        }
-    }
-
     function renderRecent() {
         const container = document.getElementById('recentList');
         if(!container) return;
-        if(!recent.length) { container.innerHTML = '<div class="recent-empty">✨ Здесь будут места, которые вы посмотрите</div>'; return; }
-        container.innerHTML = recent.map(item => `<div class="place-card" onclick="viewPlace('${item.name}', '${item.photo}', '${item.type}')" style="margin-bottom:8px;"><img class="place-img" src="${item.photo}"><div class="place-info"><div class="place-title">${item.name}</div><div class="place-desc">${item.type}</div></div></div>`).join('');
+        if(!recent.length) { container.innerHTML = '<div class="favorite-empty">✨ Нажмите на любое место — оно появится здесь</div>'; return; }
+        container.innerHTML = recent.map(item => `<div class="place-card" style="margin-bottom:8px;"><div class="place-icon">${item.icon || '📍'}</div><div class="place-info"><div class="place-name">${item.name}</div><div class="place-desc">${item.desc || 'Посмотрено недавно'}</div></div></div>`).join('');
     }
 
-    function addToRecent(name, photo, type) {
+    function addToRecent(name, icon, desc) {
         recent = recent.filter(r => r.name !== name);
-        recent.unshift({ name, photo, type });
-        if(recent.length > 6) recent.pop();
+        recent.unshift({ name, icon, desc });
+        if(recent.length > 8) recent.pop();
         saveRecent();
         renderRecent();
-    }
-
-    function viewPlace(name, photo, type) {
-        addToRecent(name, photo, type);
-        const modal = document.getElementById('modal');
-        document.getElementById('modalImg').src = photo;
-        document.getElementById('modalTitle').innerText = name;
-        modal.classList.add('active');
     }
 
     function showScreen(screenId) {
@@ -548,33 +617,40 @@
         document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
         const activeTab = document.querySelector(`.tab[data-screen="${screenId}"]`);
         if(activeTab) activeTab.classList.add('active');
+        if(currentUser) document.getElementById('bottomNav').style.display = 'flex';
     }
 
     function login() {
         const email = document.getElementById('loginEmail').value;
-        const pass = document.getElementById('loginPassword').value;
         if(!email) { alert('Введите email'); return; }
         currentUser = { email, name: email.split('@')[0], recent: [] };
         saveUser();
-        updateUI();
+        document.getElementById('welcomeName').innerText = `Привет, ${currentUser.name}!`;
+        document.getElementById('profileName').innerText = currentUser.name || 'Гость';
+        document.getElementById('profileEmail').innerText = currentUser.email;
+        renderRecent();
         showScreen('mainScreen');
     }
 
     function register() {
         const name = document.getElementById('regName').value;
         const email = document.getElementById('regEmail').value;
-        const pass = document.getElementById('regPassword').value;
         if(!name || !email) { alert('Заполните имя и email'); return; }
         currentUser = { email, name, recent: [] };
         saveUser();
-        updateUI();
+        document.getElementById('welcomeName').innerText = `Привет, ${currentUser.name}!`;
+        document.getElementById('profileName').innerText = currentUser.name;
+        document.getElementById('profileEmail').innerText = currentUser.email;
+        renderRecent();
         showScreen('mainScreen');
     }
 
-    function logout() { currentUser = null; localStorage.removeItem('eysk_user'); recent = []; updateUI(); showScreen('authScreen'); }
+    function logout() { currentUser = null; localStorage.removeItem('eysk_user'); recent = []; showScreen('authScreen'); }
+
     function showRegister() { showScreen('registerScreen'); }
     function showLogin() { showScreen('authScreen'); }
 
+    // Обработчики кликов
     document.querySelectorAll('.tab').forEach(tab => {
         tab.addEventListener('click', () => { if(currentUser) showScreen(tab.dataset.screen); });
     });
@@ -588,6 +664,7 @@
             if(goto === 'fun') showScreen('funScreen');
             if(goto === 'beaches') showScreen('beachesScreen');
             if(goto === 'routes') showScreen('routesScreen');
+            if(goto === 'sights') showScreen('sightsScreen');
             e.stopPropagation();
         });
     });
@@ -595,22 +672,23 @@
     document.querySelectorAll('.place-card').forEach(card => {
         card.addEventListener('click', (e) => {
             if(!currentUser) return;
-            const name = card.dataset.name || card.querySelector('.place-title')?.innerText || 'Место';
-            const photo = card.dataset.photo || card.querySelector('.place-img')?.src || 'https://images.unsplash.com/photo-1587538794963-3b8706d6c0d9?w=200&h=200&fit=crop';
-            const type = card.closest('[id]')?.id.replace('Screen','') || 'место';
-            viewPlace(name, photo, type);
+            const name = card.querySelector('.place-name')?.innerText || 'Место';
+            const icon = card.querySelector('.place-icon')?.innerText || '📍';
+            const desc = card.querySelector('.place-desc')?.innerText || '';
+            addToRecent(name, icon, desc);
+            alert(`✨ ${name} добавлено в избранное!`);
         });
     });
 
-    if(loadUser()) { updateUI(); showScreen('mainScreen'); }
-    else { showScreen('authScreen'); }
+    if(loadUser()) { 
+        document.getElementById('welcomeName').innerHTML = `Привет, ${currentUser.name}!`;
+        document.getElementById('profileName').innerText = currentUser.name || 'Гость';
+        document.getElementById('profileEmail').innerText = currentUser.email;
+        renderRecent();
+        showScreen('mainScreen'); 
+    } else { 
+        showScreen('authScreen'); 
+    }
 </script>
-
-<!-- Модальное окно -->
-<div id="modal" class="modal" onclick="document.getElementById('modal').classList.remove('active')">
-    <span class="modal-close">&times;</span>
-    <img id="modalImg" class="modal-img" src="">
-    <div id="modalTitle" style="color:white; margin-top:20px; font-size:18px; font-weight:600;"></div>
-</div>
 </body>
 </html>
